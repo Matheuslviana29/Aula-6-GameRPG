@@ -1,48 +1,33 @@
 import java.util.Scanner;
 
-public class Jogador extends Criatura{
+public class Jogador extends Criatura {
+    private Arma[] armas;
 
-    private Arma[]  armas = {
-            new Faca(),
-            new Pistola(),
-            new Espada(),
-            new ArcoEFlecha()
-    };
-
-    public Jogador(String nome) {
+    public Jogador(String nome, Arma armaCurta, Arma armaLonga) {
         super(nome, 900);
+        this.armas = new Arma[]{armaCurta, armaLonga};
     }
 
     @Override
     public void fazAtaque(Criatura alvo) {
-        Scanner sc = new Scanner((System.in));
+        Scanner sc = new Scanner(System.in);
         System.out.println("=== Escolha sua arma: ===");
 
-        for(Arma arma : armas){
-            int n = 0;
-            n++;
-            System.out.print(n + ") ");
-            arma.descricao();
+        for (int i = 0; i < armas.length; i++) {
+            System.out.print((i + 1) + ") ");
+            armas[i].descricao();
+        }
 
         int escolha = sc.nextInt();
 
-        while(escolha < 1 || escolha > n ){
+        while (escolha < 1 || escolha > armas.length) {
             System.out.println("Número inválido, escolha outro:");
             escolha = sc.nextInt();
         }
 
-        armas [n-1].golpe(alvo);
-        }
-
+        armas[escolha - 1].golpe(alvo);
     }
 
-    @Override
-    public void fazApresentacao() {
-        System.out.println("Vou chegar amassando vc MALIGNUS !!!");
-    }
-
-    @Override
-    public void fraseMorte() {
-        System.out.println("Deu sorte desta vez ");
-    }
+    @Override public void fazApresentacao() { System.out.println("Vou chegar amassando!!!"); }
+    @Override public void fraseMorte() { System.out.println("Deu sorte desta vez..."); }
 }

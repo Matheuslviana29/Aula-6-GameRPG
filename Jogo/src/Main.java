@@ -1,38 +1,42 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        Criatura Jogador = new Jogador("Matheus");
-        Criatura inimigo = new Demonion();
+        System.out.print("Digite seu nome de herói: ");
+        String nome = sc.nextLine();
 
-        System.out.println("#############");
-        System.out.println("A grande batalha");
-        System.out.println("#############");
+        System.out.println("Escolha sua arma curta: 1-Espada / 2-Faca");
+        Arma curta = (sc.nextInt() == 1) ? new Espada() : new Faca();
 
-        Jogador.fazApresentacao();
-        inimigo.fazApresentacao();
+        System.out.println("Escolha sua arma longa: 1-Arco / 2-Pistola");
+        Arma longa = (sc.nextInt() == 1) ? new ArcoEFlecha() : new Pistola();
 
-        int cont = 0;
-        while(true){
-            cont++;
-            System.out.println("Rodada" + cont);
+        Jogador jogador = new Jogador(nome, curta, longa);
 
-            Jogador.mostrarVida();
-            inimigo.mostrarVida();
-            Jogador.fazAtaque(inimigo);
-            if(inimigo.estarVivo()){
-                inimigo.fazAtaque(Jogador);
-            }
-            if(!Jogador.estarVivo()){
-                Jogador.fraseMorte();
-                System.out.println(inimigo.getNome() + " venceu!");
+        Inimigo[] inimigos = { new Thanos(), new Magneto(), new Galactus() };
+        ArrayList<String> historico = new ArrayList<>();
+
+        for (int i = 0; i < inimigos.length; i++) {
+            Batalha luta = new Batalha();
+            Criatura vencedor = luta.iniciar(jogador, inimigos[i]);
+
+            historico.add("Batalha " + (i+1) + " (" + inimigos[i].getNome() + "): Vencedor = " + luta.getVencedor());
+
+            if (vencedor == jogador) {
+                System.out.println("Você venceu " + inimigos[i].getNome() + "! Vida restaurada.");
+                jogador.restaurarVida(); // Tarefa 6
+            } else {
+                System.out.println("Você foi derrotado por " + inimigos[i].getNome() + "...");
                 break;
-            } else if (!inimigo.estarVivo()) {
-                inimigo.fraseMorte();
-                System.out.println(Jogador.getNome() + " venceu!");
-                break;
-
             }
+        }
 
+        System.out.println("\n=== RESUMO DAS BATALHAS ===");
+        for (String registro : historico) {
+            System.out.println(registro);
         }
     }
 }

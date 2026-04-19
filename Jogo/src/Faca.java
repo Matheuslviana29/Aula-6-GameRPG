@@ -1,6 +1,5 @@
-public class Faca extends  Arma{
-
+public class Faca extends Arma {
     public Faca() {
-        super("Faca", 50, 100);
+        super("Faca", 90, 50, -1);
     }
 }
