@@ -27,7 +27,7 @@ public class Main {
 
             if (vencedor == jogador) {
                 System.out.println("Você venceu " + inimigos[i].getNome() + "! Vida restaurada.");
-                jogador.restaurarVida(); // Tarefa 6
+                jogador.restaurarVida();
             } else {
                 System.out.println("Você foi derrotado por " + inimigos[i].getNome() + "...");
                 break;

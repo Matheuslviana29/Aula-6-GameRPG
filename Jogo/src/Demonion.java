@@ -6,7 +6,7 @@ public class Demonion extends Inimigo{
 
     @Override
     public void fazApresentacao() {
-        System.out.println("VIM PARA ACABAR COM A HUMINDADE");
+        System.out.println("VIM PARA ACABAR COM TUDO");
     }
 
     @Override
