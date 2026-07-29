@@ -1,4 +1,4 @@
-# ⚔️ Mini RPG em Java
+#  Mini RPG em Java
 
 Este é um mini-jogo de RPG em texto no terminal que desenvolvi durante minhas aulas de **Programação Orientada a Objetos (POO)**.
 
